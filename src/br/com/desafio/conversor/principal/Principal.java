@@ -5,6 +5,7 @@ import br.com.desafio.conversor.modelos.Moedas;
 
 import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Principal {
@@ -30,22 +31,29 @@ public class Principal {
         while (continua) {
             menuEscolhas();
             System.out.println();
-            finalizacao(valorConvertido, moedaAntiga, moedaNova);
+            if (continua) {
+                finalizacao(valorConvertido, moedaAntiga, moedaNova);
+            }
         }
 
     }
 
     private static void finalizacao(double valor, String mAntiga, String mNova) {
         System.out.println("=================================");
-        System.out.println("Valor em " + mAntiga + " : " + valorAntes + "." );
-        System.out.println("Valor em " + mNova + " : " + valor + "." );
+        System.out.println("Valor em " + mAntiga + " : " + valorAntes);
+        System.out.println("Valor em " + mNova + " : " + valor);
         System.out.println("=================================");
+        System.out.println();
     }
 
     private static void menuEscolhas() throws IOException, InterruptedException {
 
         System.out.println("********************************************************");
+        System.out.println("************ Conversor de moedas ************");
         System.out.println("Escolha uma das opções de conversão");
+
+        System.out.println();
+
         System.out.println("0 - Dolar para real");
         System.out.println("1 - Dolar para euro");
         System.out.println("2 - Peso argentino para real");
@@ -58,75 +66,85 @@ public class Principal {
         System.out.println("9 - Sair");
 
         System.out.println("********************************************************");
-        int escolha = scanner.nextInt();
 
-        switch (escolha) {
-            case 0:
-                valorConvertido = conv.converterValor(escolhaValor(), "USD", "BRL");
-                moedaAntiga = "USD";
-                moedaNova = "BRL";
-                break;
 
-            case 1:
-                valorConvertido = conv.converterValor(escolhaValor(), "USD", "EUR");
-                moedaAntiga = "USD";
-                moedaNova = "EUR";
-                break;
+        try {
+            int escolha = scanner.nextInt();
+            switch (escolha) {
+                case 0:
+                    valorConvertido = conv.converterValor(escolhaValor(), "USD", "BRL");
+                    moedaAntiga = "USD";
+                    moedaNova = "BRL";
+                    break;
 
-            case 2:
-                valorConvertido = conv.converterValor(escolhaValor(), "ARS", "BRL");
-                moedaAntiga = "ARS";
-                moedaNova = "BRL";
-                break;
+                case 1:
+                    valorConvertido = conv.converterValor(escolhaValor(), "USD", "EUR");
+                    moedaAntiga = "USD";
+                    moedaNova = "EUR";
+                    break;
 
-            case 3:
-                valorConvertido = conv.converterValor(escolhaValor(), "ARS", "USD");
-                moedaAntiga = "ARS";
-                moedaNova = "USD";
-                break;
+                case 2:
+                    valorConvertido = conv.converterValor(escolhaValor(), "ARS", "BRL");
+                    moedaAntiga = "ARS";
+                    moedaNova = "BRL";
+                    break;
 
-            case 4:
-                valorConvertido = conv.converterValor(escolhaValor(), "BRL", "JPY");
-                moedaAntiga = "BRL";
-                moedaNova = "JPY";
-                break;
+                case 3:
+                    valorConvertido = conv.converterValor(escolhaValor(), "ARS", "USD");
+                    moedaAntiga = "ARS";
+                    moedaNova = "USD";
+                    break;
 
-            case 5:
-                valorConvertido = conv.converterValor(escolhaValor(), "BRL", "USD");
-                moedaAntiga = "BRL";
-                moedaNova = "USD";
-                break;
+                case 4:
+                    valorConvertido = conv.converterValor(escolhaValor(), "BRL", "JPY");
+                    moedaAntiga = "BRL";
+                    moedaNova = "JPY";
+                    break;
 
-            case 6:
-                valorConvertido = conv.converterValor(escolhaValor(), "EUR", "ARS");
-                moedaAntiga = "EUR";
-                moedaNova = "ARS";
-                break;
+                case 5:
+                    valorConvertido = conv.converterValor(escolhaValor(), "BRL", "USD");
+                    moedaAntiga = "BRL";
+                    moedaNova = "USD";
+                    break;
 
-            case 7:
-                valorConvertido = conv.converterValor(escolhaValor(), "EUR", "JPY");
-                moedaAntiga = "EUR";
-                moedaNova = "JPY";
-                break;
+                case 6:
+                    valorConvertido = conv.converterValor(escolhaValor(), "EUR", "ARS");
+                    moedaAntiga = "EUR";
+                    moedaNova = "ARS";
+                    break;
 
-            case 8:
-                valorConvertido = conv.converterValor(escolhaValor(), "JPY", "EUR");
-                moedaAntiga = "JPY";
-                moedaNova = "EUR";
-                break;
+                case 7:
+                    valorConvertido = conv.converterValor(escolhaValor(), "EUR", "JPY");
+                    moedaAntiga = "EUR";
+                    moedaNova = "JPY";
+                    break;
 
-            case 9:
-                continua = false;
-                System.out.println("Finalizando o programa...");
-                System.out.println("Programa finalizado!");
-                break;
+                case 8:
+                    valorConvertido = conv.converterValor(escolhaValor(), "JPY", "EUR");
+                    moedaAntiga = "JPY";
+                    moedaNova = "EUR";
+                    break;
 
-            default:
-                System.out.println("-----------------------------");
-                System.out.println("Escolha inválida tente novamente.");
-                System.out.println("-----------------------------");
-                break;
+                case 9:
+                    continua = false;
+                    System.out.println("Finalizando o programa...");
+                    System.out.println("Programa finalizado!");
+                    break;
+
+                default:
+                    System.out.println("-----------------------------");
+                    System.out.println("Escolha inválida tente novamente.");
+                    System.out.println("-----------------------------");
+                    break;
+            }
+
+        } catch (InputMismatchException e) {
+            System.out.println("Apenas números são aceitos!");
+            continua = false;
+            System.out.println("Finalizando o programa...");
+            System.out.println("Programa finalizado!");
         }
+
     }
 
     private static double escolhaValor() {

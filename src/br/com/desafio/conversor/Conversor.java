@@ -53,11 +53,10 @@ public class Conversor {
         //Passando os valores necessarios para um Record
         Moedas moedas = gson.fromJson(valores, Moedas.class);
 
-
         /*for (String key : map.keySet()) {
             System.out.println("Chave: [" + key + "]");
         }*/
-        System.out.println(moedas);
+
         return moedas;
     }
 
